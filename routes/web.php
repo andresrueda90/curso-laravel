@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
+Route::get('/dashboard', 'DashboardController@index');
 
+Route::resource('/expense_reports', 'ExpenseReportController');
+Route::get('/expense_reports/{id}/confirmDelete', 'ExpenseReportController@confirmDelete');
+Route::get('/expense_reports/{id}/confirmSendMail', 'ExpenseReportController@confirmSendMail');
+Route::post('/expense_reports/{id}/sendMail', 'ExpenseReportController@sendMail');
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/expense_reports/{expense_report}/expenses/create', 'ExpenseController@create');
+Route::post('/expense_reports/{expense_report}/expenses', 'ExpenseController@store');
+
